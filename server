@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+var kinect = require('./build/Release/addon');
+var png = require('../node-png/build/Release/png').Png;
+var io = require('socket.io').listen(4040, { log: false });
+
+io.sockets.on('connection', function (socket) {
+  console.log( "STATUS: Connected" )
+
+  var connected = true;
+
+  socket.on('disconnect', function () {
+    console.log( "STATUS: Disconnected" )
+    connected = false;
+  });
+
+  socket.on('depthfilter', function ( option ) {
+    kinect.setDepthRangeFilter( option.min, option.max );
+
+    console.log( "REQ: setDepthRangeFilter( %d, %d )", option.min, option.max )
+  });
+
+  function writeImage(rgb) {
+    var pngData = new png(rgb, 640, 480, 'rgb');
+    var png_image = "data:image/png;base64," + pngData.encodeSync().toString('base64');
+
+    socket.emit('depthframe', { data: png_image });
+  }
+
+  function capture() {
+    kinect.captureDepth( writeImage );
+    if ( connected )
+      setTimeout( capture, 50 );
+  }
+
+  capture();
+});
+

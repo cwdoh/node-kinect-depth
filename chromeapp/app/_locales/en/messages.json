@@ -1,0 +1,10 @@
+{
+    "appName": {
+        "message": "kinect-depth-chromeapp",
+        "description": "The name of the application"
+    },
+    "appDescription": {
+        "message": "node.js kinect-depth addon Testkit - ChromeApps",
+        "description": "The description of the application"
+    }
+}

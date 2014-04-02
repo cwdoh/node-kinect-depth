@@ -1,0 +1,33 @@
+{
+  "name": "kinect-depth",
+  "version": "0.1.0",
+  "description": "Kinect depth buffer access interface tester",
+  "main": "server",
+  "private": true,
+  "dependencies": {
+    "socket.io": "~0.9.16"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cwdoh/node-kinect-depth"
+  },
+  "keywords": [
+    "kinect",
+    "depth",
+    "node.js",
+    "addon"
+  ],
+  "author": "Chang W. Doh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cwdoh/node-kinect-depth/issues"
+  },
+  "homepage": "https://github.com/cwdoh/node-kinect-depth"
+}
